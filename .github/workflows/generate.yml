@@ -13,7 +13,7 @@ jobs:
     steps:
       - name: Check-out repository
         uses: actions/checkout@v3
-      - name: Generate Zircolite rules
+      - name: Get Zircolite repository
         shell: bash
         run: |
           git clone https://github.com/wagga40/Zircolite.git
@@ -32,9 +32,11 @@ jobs:
           pip install -r requirements.txt -r requirements.full.txt
 
       - name: Get Zircolite version
+        if: runner.os == 'Windows'
         run: |
-          echo zircolite_version=$(cat zircolite.py | grep "version = \"" | cut -d'"' -f2) >> "$GITHUB_ENV"
+          $Version = (Select-String -Path .\zircolite.py -Pattern 'version = "' | Select-Object -ExpandProperty line | Out-String).Split('"')[1]
+          echo "ZIRCOLITE_VERSION=$Version" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append
 
       - name: Print Zircolite version
         run: |
-          echo $zircolite_version
+          echo $ZIRCOLITE_VERSION
