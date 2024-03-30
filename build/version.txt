@@ -1,0 +1,28 @@
+VSVersionInfo(
+  ffi=FixedFileInfo(
+    filevers=(2, 20, 0, 0),
+    prodvers=(2, 20, 0, 0),
+    mask=0x3f,
+    flags=0x0,
+    OS=0x40004,
+    fileType=0x1,
+    subtype=0x0,
+    date=(0, 0)
+    ),
+  kids=[
+    StringFileInfo(
+      [
+      StringTable(
+        u'040904B0',
+        [StringStruct(u'CompanyName', u'Wagga40 at yahoo.com'),
+        StringStruct(u'FileDescription', u'Zircolite'),
+        StringStruct(u'FileVersion', u'2.20.0'),
+        StringStruct(u'InternalName', u'zircolite'),
+        StringStruct(u'LegalCopyright', u'\xa9 Wagga40 at github.com.'),
+        StringStruct(u'OriginalFilename', u'zircolite.exe'),
+        StringStruct(u'ProductName', u'Zircolite'),
+        StringStruct(u'ProductVersion', u'2, 20, 0, 0')])
+      ]), 
+    VarFileInfo([VarStruct(u'Translation', [1033, 1200])])
+  ]
+)
