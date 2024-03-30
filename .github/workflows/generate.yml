@@ -46,7 +46,8 @@ jobs:
           enable-plugins: multiprocessing
           windows-icon-from-ico: ./build/app.ico
           product-name: Zircolite
-          file-version: $ZIRCOLITE_VERSION
+          file-version: ${{ env.ZIRCOLITE_VERSION }}
+          product-version: ${{ env.ZIRCOLITE_VERSION }}
           company-name: Wagga
           file-description: Zircolite
           copyright: Wagga
