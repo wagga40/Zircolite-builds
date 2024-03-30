@@ -29,7 +29,7 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          pip install -r requirements.txt -r requirements.full.txt
+          pip install -r requirements.full.txt
 
       - name: Get Zircolite version
         if: runner.os == 'Windows'
@@ -42,6 +42,7 @@ jobs:
         with:
           nuitka-version: main
           script-name: zircolite.py
+          output-file: zircolite_win_x64_${{ env.ZIRCOLITE_VERSION }}.exe
           onefile: true
           enable-plugins: multiprocessing
           windows-icon-from-ico: ./build/app.ico
@@ -52,11 +53,22 @@ jobs:
           file-description: Zircolite
           copyright: Wagga
 
+      - name: Build package
+        run: |
+          mkdir zircolite_win
+          mkdir .\zircolite_win\bin
+          cp -R rules .\zircolite_win\
+          cp -R config .\zircolite_win\
+          cp -R docs .\zircolite_win\
+          cp -R gui .\zircolite_win\
+          cp -R templates .\zircolite_win\
+          cp -R .\bin\evtx_dump_win.exe .\zircolite_win\bin\
+          cp zircolite_win_x64_${{ env.ZIRCOLITE_VERSION }}.exe .\zircolite_win\
+          7z a zircolite_win_x64_${{ env.ZIRCOLITE_VERSION }}.7z .\zircolite_win\ -mx9 -ms=on
+
       - name: Upload Artifacts
         uses: actions/upload-artifact@v3
         with:
           name: ${{ runner.os }} Build
           path: |
-            build/*.exe
-            build/*.bin
-            build/*.app/**/*
+            *.7z

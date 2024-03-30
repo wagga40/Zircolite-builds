@@ -1,0 +1,19 @@
+[{
+    "title": "Suspicious Rundll32 Activity",
+    "id": "e593cf51-88db-4ee1-b920-37e89012a3c9",
+    "status": "test",
+    "description": "Detects suspicious process related to rundll32 based on arguments",
+    "author": "juju4, Jonhnathan Ribeiro, oscd.community, Nasreddine Bencherchali",
+    "tags": [
+        "attack.defense_evasion",
+        "attack.t1218.011"
+    ],
+    "falsepositives": [
+        "False positives depend on scripts and administrative tools used in the monitored environment"
+    ],
+    "level": "medium",
+    "rule": [
+        "SELECT * FROM logs WHERE ((EventID = '1' AND Channel = 'Microsoft-Windows-Sysmon/Operational') AND ((CommandLine LIKE '%javascript:%' ESCAPE '\\' AND CommandLine LIKE '%.RegisterXLL%' ESCAPE '\\') OR (CommandLine LIKE '%url.dll%' ESCAPE '\\' AND CommandLine LIKE '%OpenURL%' ESCAPE '\\') OR (CommandLine LIKE '%url.dll%' ESCAPE '\\' AND CommandLine LIKE '%OpenURLA%' ESCAPE '\\') OR (CommandLine LIKE '%url.dll%' ESCAPE '\\' AND CommandLine LIKE '%FileProtocolHandler%' ESCAPE '\\') OR (CommandLine LIKE '%zipfldr.dll%' ESCAPE '\\' AND CommandLine LIKE '%RouteTheCall%' ESCAPE '\\') OR (CommandLine LIKE '%shell32.dll%' ESCAPE '\\' AND CommandLine LIKE '%Control\\_RunDLL%' ESCAPE '\\') OR (CommandLine LIKE '%shell32.dll%' ESCAPE '\\' AND CommandLine LIKE '%ShellExec\\_RunDLL%' ESCAPE '\\') OR (CommandLine LIKE '%mshtml.dll%' ESCAPE '\\' AND CommandLine LIKE '%PrintHTML%' ESCAPE '\\') OR (CommandLine LIKE '%advpack.dll%' ESCAPE '\\' AND CommandLine LIKE '%LaunchINFSection%' ESCAPE '\\') OR (CommandLine LIKE '%advpack.dll%' ESCAPE '\\' AND CommandLine LIKE '%RegisterOCX%' ESCAPE '\\') OR (CommandLine LIKE '%ieadvpack.dll%' ESCAPE '\\' AND CommandLine LIKE '%LaunchINFSection%' ESCAPE '\\') OR (CommandLine LIKE '%ieadvpack.dll%' ESCAPE '\\' AND CommandLine LIKE '%RegisterOCX%' ESCAPE '\\') OR (CommandLine LIKE '%ieframe.dll%' ESCAPE '\\' AND CommandLine LIKE '%OpenURL%' ESCAPE '\\') OR (CommandLine LIKE '%shdocvw.dll%' ESCAPE '\\' AND CommandLine LIKE '%OpenURL%' ESCAPE '\\') OR (CommandLine LIKE '%syssetup.dll%' ESCAPE '\\' AND CommandLine LIKE '%SetupInfObjectInstallAction%' ESCAPE '\\') OR (CommandLine LIKE '%setupapi.dll%' ESCAPE '\\' AND CommandLine LIKE '%InstallHinfSection%' ESCAPE '\\') OR (CommandLine LIKE '%pcwutl.dll%' ESCAPE '\\' AND CommandLine LIKE '%LaunchApplication%' ESCAPE '\\') OR (CommandLine LIKE '%dfshim.dll%' ESCAPE '\\' AND CommandLine LIKE '%ShOpenVerbApplication%' ESCAPE '\\') OR (CommandLine LIKE '%dfshim.dll%' ESCAPE '\\' AND CommandLine LIKE '%ShOpenVerbShortcut%' ESCAPE '\\') OR (CommandLine LIKE '%scrobj.dll%' ESCAPE '\\' AND CommandLine LIKE '%GenerateTypeLib%' ESCAPE '\\' AND CommandLine LIKE '%http%' ESCAPE '\\') OR (CommandLine LIKE '%shimgvw.dll%' ESCAPE '\\' AND CommandLine LIKE '%ImageView\\_Fullscreen%' ESCAPE '\\' AND CommandLine LIKE '%http%' ESCAPE '\\')) AND NOT ((CommandLine LIKE '%shell32.dll,Control\\_RunDLL desk.cpl,screensaver,@screensaver%' ESCAPE '\\') OR (ParentImage LIKE 'C:\\\\Windows\\\\System32\\\\control.exe' ESCAPE '\\' AND ParentCommandLine LIKE '%.cpl%' ESCAPE '\\')))"
+    ],
+    "filename": "proc_creation_win_susp_rundll32_activity.yml"
+}]
