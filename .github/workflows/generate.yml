@@ -37,6 +37,25 @@ jobs:
           $Version = (Select-String -Path .\zircolite.py -Pattern 'version = "' | Select-Object -ExpandProperty line | Out-String).Split('"')[1]
           echo "ZIRCOLITE_VERSION=$Version" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append
 
-      - name: Print Zircolite version
-        run: |
-          echo $ZIRCOLITE_VERSION
+      - name: Build Executable
+        uses: Nuitka/Nuitka-Action@main
+        with:
+          nuitka-version: main
+          script-name: zircolite.py
+          onefile: true
+          enable-plugins: multiprocessing
+          windows-icon-from-ico: ./build/app.ico
+          product-name: Zircolite
+          file-version: $ZIRCOLITE_VERSION
+          company-name: Wagga
+          file-description: Zircolite
+          copyright: Wagga
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ runner.os }} Build
+          path: |
+            build/*.exe
+            build/*.bin
+            build/*.app/**/*
