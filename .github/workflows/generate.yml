@@ -44,7 +44,6 @@ jobs:
           script-name: zircolite.py
           output-file: zircolite_win_x64_${{ env.ZIRCOLITE_VERSION }}.exe
           onefile: true
-          enable-plugins: multiprocessing
           windows-icon-from-ico: ./build/app.ico
           product-name: Zircolite
           file-version: ${{ env.ZIRCOLITE_VERSION }}
