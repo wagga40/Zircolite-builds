@@ -61,7 +61,6 @@ jobs:
           cp -R docs .\zircolite_win\
           cp -R gui .\zircolite_win\
           cp -R templates .\zircolite_win\
-          cp -R .\bin\evtx_dump_win.exe .\zircolite_win\bin\
           cp .\build\zircolite_win_x64_${{ env.ZIRCOLITE_VERSION }}.exe .\zircolite_win\
           7z a zircolite_win_x64_${{ env.ZIRCOLITE_VERSION }}.7z .\zircolite_win\ -mx9 -ms=on
 
